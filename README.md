@@ -531,4 +531,35 @@ new Array(2).hasOwnProperty(0); // false
 [undefined, undefined].hasOwnProperty(0); // true
 ```
 
+**Và đó là lý do tại sao bạn không thể mong đợi bất kỳ hàm lặp nào hoạt động như thông thường trên các mảng được tạo ra từ `new Array(len)`.**
+
 ## Vậy còn `new Array()` vs `Array()` khác gì nhau?
+
+Sự khác biệt giữa:
+
+```js
+x = Array();
+```
+
+và
+
+```js
+x = new Array();
+```
+
+Theo chuẩn, khi `Array` được gọi như một hàm thay vì như một `constructor`, nó tạo và khởi tạo một đối tượng Mảng mới. Do đó, cuộc gọi hàm `Array(…)` tương đương với biểu thức tạo đối tượng mới `new Array(…)` với các đối số tương tự.
+
+Lý do có thể sử dụng `Array` mà không cần từ khóa `new` là vì bên trong nó thực hiện một trick phổ biến với các `contructor`
+
+Như thế này:
+
+```js
+function Thing() {
+  if (!(this instanceof Thing)) {
+    return new Thing();
+  }
+  // ... define object
+}
+```
+
+Nghĩa là, nếu bạn gọi `Thing()` nó sẽ gọi `new Thing()` cho bạn.
