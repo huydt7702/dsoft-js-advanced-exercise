@@ -538,13 +538,13 @@ new Array(2).hasOwnProperty(0); // false
 Sự khác biệt giữa:
 
 ```js
-x = Array();
+const x = Array(); // Return: []
 ```
 
 và
 
 ```js
-x = new Array();
+const x = new Array(); // Return: []
 ```
 
 Theo chuẩn, khi `Array` được gọi như một hàm thay vì như một `constructor`, nó tạo và khởi tạo một đối tượng Mảng mới. Do đó, cuộc gọi hàm `Array(…)` tương đương với biểu thức tạo đối tượng mới `new Array(…)` với các đối số tương tự.
@@ -563,3 +563,37 @@ function Thing() {
 ```
 
 Nghĩa là, nếu bạn gọi `Thing()` nó sẽ gọi `new Thing()` cho bạn.
+
+## So sánh `.at(index)` vs `array[index]`
+
+Điểm khác biệt giữa `.at(index)` và `array[index]`
+
+```js
+const arr = [1, 2, 3, 4, 5];
+arr[2]; // Return: 3
+```
+
+```js
+const arr = [1, 2, 3, 4, 5];
+arr.at(2); // Return: 3
+```
+
+Chà!!, trông có vẻ như nó rất giống nhau nhề
+
+**KHÔNG ĐÂU!!!**
+
+Cùng mình tìm hiểu nhé điểm khác biệt ở đây là gì nhé:
+
+Phương thức `Array.prototype.at()` đã được giới thiệu trên `MDN`. Nó có vẻ hữu ích hơn so với việc sử dụng dấu ngoặc vuông `arr[i]` vì có tùy chọn để chỉ định chỉ số bắt đầu từ cuối mảng, ví dụ: `arr.at(-1)` sẽ trả về phần tử cuối cùng của mảng arr.
+
+```js
+const arr = [1, 2, 3, 4, 5, 6];
+arr.at(-1); // Return: 6
+```
+
+Tuy nhiên, có những hạn chế khi chuyển sang sử dụng nó:
+
+- Đó là một phương pháp rất mới. Các trình duyệt cũ hơn sẽ không thể hiểu mã của bạn nếu bạn sử dụng nó, trừ khi bạn tạo một `polyfill`
+- Mặt khác, vì đó là một phương thức mới, không ngạc nhiên nếu một số lượng đáng kể các nhà phát triển chưa biết về nó - việc sử dụng `.at()` có thể làm bối rối một số người (và khiến họ phải tìm kiếm). Điều này không có nghĩa là bạn không nên sử dụng nó, nhưng đây là một điều cần lưu ý.
+
+À, còn một điểm khác biệt nữa là `Array.prototype.at()` chỉ để truy xuất phần tử trong mảng. Nó không thể được sử dụng để gán, nhưng `array[index]` thì có thể.
