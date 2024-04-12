@@ -501,4 +501,34 @@ const f = new Array(3); // f.length == 3, f[0] == undefined
 ```
 
 - Một điểm khác biệt là khi sử dụng `new Array()`, bạn có thể thiết lập kích thước của mảng, điều này ảnh hưởng đến kích thước của `stack`. Điều này có thể hữu ích nếu bạn đang gặp phải tình trạng tràn `stack` (stack overflow), đó là điều xảy ra khi kích thước của mảng vượt quá kích thước của stack, và nó phải được tạo lại. Vì vậy, tùy thuộc vào trường hợp sử dụng, có thể có sự tăng `performance` khi sử dụng new Array() bởi vì bạn có thể ngăn chặn tình trạng tràn xảy ra.
-- Còn một điểm khác biệt nữa là: `new Array(5) `thực sự không thêm 5 phần tử `undefined` vào mảng. Nó chỉ thêm không gian cho 5 phần tử. Hãy nhớ rằng việc sử dụng `Array` theo cách này sẽ gây khó khăn cho việc dựa vào `array.length` để tính toán.
+- Còn một điểm khác biệt nữa là: `new Array(5)`thực sự không thêm 5 phần tử `undefined` vào mảng. Nó chỉ thêm không gian cho 5 phần tử. Hãy nhớ rằng việc sử dụng `Array` theo cách này sẽ gây khó khăn cho việc dựa vào `array.length` để tính toán.
+
+Ví dụ minh họa:
+
+```js
+new Array(2).length; // 2
+new Array(2)[0] === undefined; // true
+new Array(2)[1] === undefined; // true
+```
+
+Chà!!!, có thể bạn nghĩ rằng `new Array(2)` tương đương với `[undefined, undefined]`, **nhưng KHÔNG!!!** <br> <br>
+
+Hãy thử nó với vòng `.map()`
+
+```js
+[undefined, undefined].map((e) => 1); // [1, 1]
+new Array(2).map((e) => 1); // "(2) [empty × 2]" in Chrome
+```
+
+Thấy không? Ngữ nghĩa là hoàn toàn khác nhau! Vậy tại sao lại như vậy?
+
+Theo quy định `ES6 Spec 22.1.1.2`, nhiệm vụ của `new Array(len)` chỉ là tạo ra một mảng mới mà thuộc tính `length` của nó được thiết lập là đối số `len` và đó là tất cả, có nghĩa là không có **phần tử thực** nào trong mảng mới được tạo ra này.
+
+Hàm `map()`, theo quy định `22.1.3.15`, trước tiên sẽ kiểm tra `HasProperty` sau đó gọi lại hàm `callback`
+
+```js
+new Array(2).hasOwnProperty(0); // false
+[undefined, undefined].hasOwnProperty(0); // true
+```
+
+## Vậy còn `new Array()` vs `Array()` khác gì nhau?
