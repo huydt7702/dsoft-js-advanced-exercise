@@ -2,8 +2,12 @@
 
 1. [Test performance trên các phương thức làm việc với mảng phổ biến](#test-performance)
 2. [So sánh phương thức `.splice()` vs `.slice()`](#splice-slice-difference)
+3. [So sánh `spread operator` vs `.concat()`](#spread-concat-difference)
+4. [So sánh `new Array()` vs `[]`](#newArray-brackets-difference)
+5. [So sánh `new Array()` vs `Array()`](#newArray-Array-difference)
+6. [So sánh `.at(index)` vs `array[index]`](#at-array[index]-difference)
 
-## <a name="test-performance"></a> Test performance trên các phương thức làm việc với mảng phổ biến
+## Test performance trên các phương thức làm việc với mảng phổ biến <a name="test-performance"></a>
 
 Hello anh em `D-Soft`, trong phần này chúng ta sẽ so sánh thời gian chạy của các cách được sử dụng phổ biến nhất để lặp qua một mảng trong JavaScript. <br> <br>
 Để xem cách nào sẽ hiệu quả nhất nhé. <br> <br>
@@ -226,7 +230,7 @@ do while: 175.574951171875 ms
 
 Khi chúng ta phải viết một vòng lặp, việc xem xét xem giải pháp nào hoạt động tốt nhất là rất quan trọng. Trong các mảng tương đối nhỏ, công việc tối ưu hóa được thực hiện bởi trình biên dịch V8 là đủ tốt. Tuy nhiên, khi xử lý một lượng lớn dữ liệu, thì chi phí hiệu suất có thể quan trọng nếu chúng ta không chọn một giải pháp hiệu quả nhất một cách cẩn thận thì thời gian chạy khi đó có thể gấp 11 lần trong một số trường hợp như được thể hiện trong các kết quả ở trên.
 
-## <a name="splice-slice-difference"></a> So sánh phương thức `.splice()` vs `.slice()`
+## So sánh phương thức `.splice()` vs `.slice()` <a name="splice-slice-difference"></a>
 
 - Khi làm việc với mảng trong JavaScript, có 2 phương thức thường được sử dụng để thao tác với mảng là `.slice()` và `.splice()`. Thoạt nhìn, chúng có vẻ giống nhau vì chúng phát ra âm thanh gần giống nhau và cả hai đều hoạt động với mảng, nhưng 2 phương thức này thực sự hoạt động hoàn toàn khác nhau.
 
@@ -366,7 +370,7 @@ Mặc dù `.slice()` và `.splice()` có vẻ giống nhau nhưng chúng hoạt 
 
 Phương thức `.slice()` tạo ra một mảng mới bằng cách sao chép các phần tử từ một mảng hiện có mà không làm thay đổi mảng cũ. Điều này hữu ích để sao chép hoặc loại bỏ một phần của các phần tử mảng. Phương thức `.splice()` trực tiếp thay đổi mảng gốc bằng cách chèn, xóa hoặc thay thế các phần tử tại chỉ mục được chỉ định. Điều này hữu ích cho các thay đổi như sắp xếp lại các phần tử của mảng.
 
-## So sánh `spread operator` vs `.concat()`
+## So sánh `spread operator` vs `.concat()` <a name="spread-concat-difference"></a>
 
 Sự khác biệt giữa `spread operator` và `.concat()`
 
@@ -471,7 +475,7 @@ concat-many: 0.338134765625 ms
 spread-many: 15.35009765625 ms
 ```
 
-## So sánh `new Array()` vs `[]`
+## So sánh `new Array()` vs `[]` <a name="newArray-brackets-difference"></a>
 
 Sự khác biệt thực sự giữa việc khai báo một mảng như thế này là gì?
 
@@ -538,7 +542,7 @@ new Array(2).hasOwnProperty(0); // false
 
 **Và đó là lý do tại sao bạn không thể mong đợi bất kỳ hàm lặp nào hoạt động như thông thường trên các mảng được tạo ra từ `new Array(len)`.**
 
-## Vậy còn `new Array()` vs `Array()` khác gì nhau?
+## Vậy còn `new Array()` vs `Array()` khác gì nhau? <a name="newArray-Array-difference"></a>
 
 Sự khác biệt giữa:
 
@@ -569,7 +573,7 @@ function Thing() {
 
 Nghĩa là, nếu bạn gọi `Thing()` nó sẽ gọi `new Thing()` cho bạn.
 
-## So sánh `.at(index)` vs `array[index]`
+## So sánh `.at(index)` vs `array[index]` <a name="at-array[index]-difference"></a>
 
 Điểm khác biệt giữa `.at(index)` và `array[index]`
 
