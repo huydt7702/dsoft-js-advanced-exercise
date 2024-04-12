@@ -1,4 +1,9 @@
-## Test performance trên các phương thức làm việc với mảng phổ biến
+# Mục lục
+
+1. [Test performance trên các phương thức làm việc với mảng phổ biến](#test-performance)
+2. [So sánh phương thức `.splice()` vs `.slice()`](#splice-slice-difference)
+
+## Test performance trên các phương thức làm việc với mảng phổ biến <a name="test-performance"></a>
 
 Hello anh em `D-Soft`, trong phần này chúng ta sẽ so sánh thời gian chạy của các cách được sử dụng phổ biến nhất để lặp qua một mảng trong JavaScript. <br> <br>
 Để xem cách nào sẽ hiệu quả nhất nhé. <br> <br>
@@ -221,7 +226,7 @@ do while: 175.574951171875 ms
 
 Khi chúng ta phải viết một vòng lặp, việc xem xét xem giải pháp nào hoạt động tốt nhất là rất quan trọng. Trong các mảng tương đối nhỏ, công việc tối ưu hóa được thực hiện bởi trình biên dịch V8 là đủ tốt. Tuy nhiên, khi xử lý một lượng lớn dữ liệu, thì chi phí hiệu suất có thể quan trọng nếu chúng ta không chọn một giải pháp hiệu quả nhất một cách cẩn thận thì thời gian chạy khi đó có thể gấp 11 lần trong một số trường hợp như được thể hiện trong các kết quả ở trên.
 
-## So sánh phương thức `.splice()` vs `.slice()`
+## So sánh phương thức `.splice()` vs `.slice()` <a name="splice-slice-difference"></a>
 
 - Khi làm việc với mảng trong JavaScript, có 2 phương thức thường được sử dụng để thao tác với mảng là `.slice()` và `.splice()`. Thoạt nhìn, chúng có vẻ giống nhau vì chúng phát ra âm thanh gần giống nhau và cả hai đều hoạt động với mảng, nhưng 2 phương thức này thực sự hoạt động hoàn toàn khác nhau.
 
