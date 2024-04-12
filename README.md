@@ -465,3 +465,40 @@ spread-big: 451.43701171875 ms
 concat-many: 0.338134765625 ms
 spread-many: 15.35009765625 ms
 ```
+
+## So sánh `new Array()` vs `[]`
+
+Sự khác biệt thực sự giữa việc khai báo một mảng như thế này là gì?
+
+```js
+const myArray = new Array();
+```
+
+và
+
+```js
+const myArray = [];
+```
+
+Việc sử dụng `new Array()` có một tùy chọn bổ sung trong các tham số: nếu truyền một số vào `constructor`, sẽ nhận được một mảng có độ dài là số đó:
+
+```js
+x = new Array(5);
+alert(x.length); // 5
+```
+
+Minh họa các cách khác nhau để tạo một mảng:
+
+```js
+const a = []; // these are the same
+const b = new Array(); // a and b are arrays with length 0
+const c = ['foo', 'bar']; // these are the same
+const d = new Array('foo', 'bar'); // c and d are arrays with 2 strings
+
+// these are different:
+const e = [3]; // e.length == 1, e[0] == 3
+const f = new Array(3); // f.length == 3, f[0] == undefined
+```
+
+- Một điểm khác biệt là khi sử dụng `new Array()`, bạn có thể thiết lập kích thước của mảng, điều này ảnh hưởng đến kích thước của `stack`. Điều này có thể hữu ích nếu bạn đang gặp phải tình trạng tràn `stack` (stack overflow), đó là điều xảy ra khi kích thước của mảng vượt quá kích thước của stack, và nó phải được tạo lại. Vì vậy, tùy thuộc vào trường hợp sử dụng, có thể có sự tăng `performance` khi sử dụng new Array() bởi vì bạn có thể ngăn chặn tình trạng tràn xảy ra.
+- Còn một điểm khác biệt nữa là: `new Array(5) `thực sự không thêm 5 phần tử `undefined` vào mảng. Nó chỉ thêm không gian cho 5 phần tử. Hãy nhớ rằng việc sử dụng `Array` theo cách này sẽ gây khó khăn cho việc dựa vào `array.length` để tính toán.
