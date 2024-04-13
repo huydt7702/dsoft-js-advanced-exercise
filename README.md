@@ -1,15 +1,72 @@
 # Mục lục
 
-1. [Test performance trên các phương thức làm việc với mảng phổ biến](#test-performance)
-2. [So sánh phương thức `.splice()` vs `.slice()`](#splice-slice-difference)
-3. [So sánh `spread operator` vs `.concat()`](#spread-concat-difference)
-4. [So sánh `new Array()` vs `[]`](#newArray-brackets-difference)
-5. [So sánh `new Array()` vs `Array()`](#newArray-Array-difference)
-6. [So sánh `.at(index)` vs `array[index]`](#at-array[index]-difference)
+1. [Ưu nhược điểm của các phương thức làm việc với mảng](#advantages-disadvantages)
+2. [Test performance trên các phương thức làm việc với mảng phổ biến](#test-performance)
+3. [So sánh phương thức `.splice()` vs `.slice()`](#splice-slice-difference)
+4. [So sánh `spread operator` vs `.concat()`](#spread-concat-difference)
+5. [So sánh `new Array()` vs `[]`](#newArray-brackets-difference)
+6. [So sánh `new Array()` vs `Array()`](#newArray-Array-difference)
+7. [So sánh `.at(index)` vs `array[index]`](#at-array[index]-difference)
+
+## Ưu nhược điểm của các phương thức làm việc với mảng <a name="advantages-disadvantages"></a>
+
+`JavaScript` là ngôn ngữ lập trình mạnh mẽ và linh hoạt, đặc biệt là khi làm việc với mảng dữ liệu. Trong phần này, chúng ta sẽ đi vào so sánh ưu nhược điểm của các hàm thao tác mảng phổ biến nhất trong `JavaScript`.
+
+1. `forEach()`
+
+- **Ưu điểm**:
+  - Dễ sử dụng, cú pháp rõ ràng, phù hợp để lặp qua các phần tử trong mảng và thực hiện hành động trên mỗi phần tử.
+- **Nhược điểm**:
+  - Không thể break khỏi vòng lặp (như các vòng lặp `for` hoặc `while`)
+  - Không trả về một giá trị mới từ vòng lặp.
+
+2. `map()`
+
+- **Ưu điểm**:
+  - Trả về một mảng mới được biến đổi từ mảng ban đầu.
+  - Dễ dàng thay đổi giá trị mà không ảnh hưởng đến mảng gốc.
+- **Nhược điểm**:
+  - Không thể dừng hoặc bỏ qua các vòng lặp.
+
+3. `filter()`
+
+- **Ưu điểm**:
+  - Trả về một mảng mới chỉ chứa các phần tử thỏa mãn điều kiện được chỉ định.
+  - Dễ đọc và dễ sử dụng.
+- **Nhược điểm**:
+  - Không thể dừng hoặc bỏ qua các vòng lặp.
+
+4. `reduce()`
+
+- **Ưu điểm**:
+  - Linh hoạt và mạnh mẽ, có thể thực hiện nhiều tác vụ khác nhau.
+  - Trả về một giá trị duy nhất sau khi biến đổi mảng.
+- **Nhược điểm**:
+  - Cú pháp phức tạp hơn so với các phương thức khác.
+  - Cần phải xác định giá trị khởi đầu cho biến kết quả.
+
+5. `find()`
+
+- **Ưu điểm**:
+  - Trả về phần tử đầu tiên trong mảng thỏa mãn điều kiện được chỉ định.
+  - Dễ đọc và dễ sử dụng.
+- **Nhược điểm**:
+  - Không thể sử dụng để biến đổi mảng.
+
+6. `some()` và `every()`
+
+- **Ưu điểm**:
+  - Trả về một giá trị `boolean` dựa trên điều kiện được áp dụng cho tất cả hoặc một phần của mảng.
+  - Giúp kiểm tra mảng một cách dễ dàng.
+- **Nhược điểm**:
+  - Chỉ trả về `true` hoặc `false`, không thể trả về các phần tử thỏa mãn điều kiện.
+  - Không thể sử dụng để biến đổi mảng.
+
+Mỗi hàm có những ưu nhược điểm riêng và được sử dụng trong các trường hợp cụ thể. Sự lựa chọn phụ thuộc vào yêu cầu cụ thể của bạn khi làm việc với mảng trong `JavaScript`.
 
 ## Test performance trên các phương thức làm việc với mảng phổ biến <a name="test-performance"></a>
 
-Hello anh em `D-Soft`, trong phần này chúng ta sẽ so sánh thời gian chạy của các cách được sử dụng phổ biến nhất để lặp qua một mảng trong JavaScript. <br> <br>
+Trong phần này chúng ta sẽ so sánh thời gian chạy của các cách được sử dụng phổ biến nhất để lặp qua một mảng trong JavaScript. <br> <br>
 Để xem cách nào sẽ hiệu quả nhất nhé. <br> <br>
 Let'go :))
 
