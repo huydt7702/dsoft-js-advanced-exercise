@@ -7,6 +7,7 @@
 5. [So sánh `new Array()` vs `[]`](#newArray-brackets-difference)
 6. [So sánh `new Array()` vs `Array()`](#newArray-Array-difference)
 7. [So sánh `.at(index)` vs `array[index]`](#at-array[index]-difference)
+8. [So sánh `.findIndex()` vs `.indexOf()`](#findIndex-indexOf-difference)
 
 ## Ưu nhược điểm của các phương thức làm việc với mảng <a name="advantages-disadvantages"></a>
 
@@ -663,3 +664,55 @@ Tuy nhiên, có những hạn chế khi chuyển sang sử dụng nó:
 - Mặt khác, vì đó là một phương thức mới, không ngạc nhiên nếu một số lượng đáng kể các nhà phát triển chưa biết về nó - việc sử dụng `.at()` có thể làm bối rối một số người (và khiến họ phải tìm kiếm). Điều này không có nghĩa là bạn không nên sử dụng nó, nhưng đây là một điều cần lưu ý.
 
 À, còn một điểm khác biệt nữa là `Array.prototype.at()` chỉ để truy xuất phần tử trong mảng. Nó không thể được sử dụng để gán, nhưng `array[index]` thì có thể.
+
+## So sánh `.findIndex()` vs `indexOf()` <a name="findIndex-indexOf-difference"></a>
+
+Đoạn code sử dụng `.findIndex()`
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+numbers.findIndex((num) => num === 3); // Return: 2
+numbers.findIndex((num) => num === 6); // Return: -1
+```
+
+Đoạn code sử dụng `.indexOf()`
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+numbers.indexOf(3); // Return: 2
+numbers.indexOf(6); // Return: -1
+```
+
+Chà!!! có thể bạn nghĩ 2 hàm này có vẻ giống nhau, tại sao `JavaScipt` lại tạo ra 2 hàm hoạt động giống nhau như vậy nhỉ??
+
+**LÀM GÌ CÓ CHUYỆN **`JAVASCRIPT`** LẠI TẠO RA 2 HÀM GIỐNG NHAU!!**
+
+Vậy điểm khác biệt ở đây là gì? Hãy cùng tớ tìm hiểu nhé <3
+
+Sự khác biệt chính là các tham số truyền vào của các hàm này:
+
+- `.indexOf()` yêu cầu một giá trị làm tham số đầu tiên. Điều này làm cho nó là lựa chọn tốt khi bạn muốn tìm index của một giá trị trong các mảng chứa các loại dữ liệu nguyên thủy `(primitive types)`(như string, number hoặc boolean).
+- `.findIndex()` yêu cầu một hàm `callback` làm tham số đầu tiên. Sử dụng hàm này nếu bạn cần tìm index trong các mảng chứa các loại dữ liệu không nguyên thủy `(non-primitive types)` (như objects) hoặc điều kiện tìm kiếm của bạn phức tạp hơn chỉ là một giá trị.
+
+Một số vị dụ để hiểu hơn nào:
+
+Trong ví dụ này tớ muốn tìm index trong một mảng chứa các object
+
+```js
+let fruits = [
+  { type: 'Apple', quantity: 9 },
+  { type: 'Banana', quantity: 2 },
+  { type: 'Orange', quantity: 8 },
+  { type: 'Pear', quantity: 777 },
+];
+
+let myIndex = fruits.findIndex((fruit) => fruit.type === 'Orange'); // Returns 2.
+```
+
+Rồi tiếp theo tớ sẽ tìm index của một array đơn giản hơn
+
+```js
+let fruits = ['Apple', 'Banana', 'Pear', 'Orange'];
+
+let index = fruits.indexOf('Orange'); // Returns 3.
+```
