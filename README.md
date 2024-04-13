@@ -9,6 +9,9 @@
 7. [So sánh `.at(index)` vs `array[index]`](#at-array[index]-difference)
 8. [So sánh `.findIndex()` vs `.indexOf()`](#findindex-indexof-difference)
 9. [So sánh `.join()` vs `.toString()`](#join-tostring-difference)
+10. [So sánh `array.__proto__` vs `Array.prototype`](#proto-prototype)
+
+Các nguồn tham khảo: `Stack Overflow`, `Chat GPT`, `Reddit` `MDN`,`W3Schools`, `Google`
 
 ## Ưu nhược điểm của các phương thức làm việc với mảng <a name="advantages-disadvantages"></a>
 
@@ -300,8 +303,8 @@ while: 150.797119140625 ms
 do while: 175.574951171875 ms
 ```
 
-- Trong trường hợp của mảng nhỏ, việc tối ưu hóa của trình biên dịch V8 khi biên dịch mã JavaScript của chúng ta là đủ tốt và thời gian chạy của các phương thức kiểm tra ở trên rất gần nhau.
-- Tuy nhiên, đối với các mảng lớn, phương thức `.map()` và `.forEach()` mất nhiều thời gian hơn nhiều (hơn mười một lần như được thể hiện trong các ví dụ trên) so với các cách lặp mảng khác. Một yếu tố gây ra thời gian bổ sung này là việc gọi các hàm callback, điều này tiêu tốn nhiều bộ nhớ hơn và do đó thêm chi phí hiệu suất hơn đối với các mảng lớn. Các vòng lặp `for`, `while` hoặc `do while` có thời gian chạy rất gần nhau trên các mảng lớn và khó có thể nói, ít nhất từ các ví dụ trên thì `for`, `while` hay `do while` có thời gian chạy nhanh hơn đáng kể so với các method làm việc với mảng khác.
+- Trong trường hợp của mảng nhỏ, việc tối ưu hóa của trình biên dịch `V8` khi biên dịch mã `JavaScript` của chúng ta là đủ tốt và thời gian chạy của các phương thức kiểm tra ở trên rất gần nhau.
+- Tuy nhiên, đối với các mảng lớn, phương thức `.map()` và `.forEach()` mất nhiều thời gian hơn nhiều (hơn mười một lần như được thể hiện trong các ví dụ trên) so với các cách lặp mảng khác. Một yếu tố gây ra thời gian bổ sung này là việc gọi các hàm `callback`, điều này tiêu tốn nhiều bộ nhớ hơn và do đó thêm chi phí hiệu suất hơn đối với các mảng lớn. Các vòng lặp `for`, `while` hoặc `do while` có thời gian chạy rất gần nhau trên các mảng lớn và khó có thể nói, ít nhất từ các ví dụ trên thì `for`, `while` hay `do while` có thời gian chạy nhanh hơn đáng kể so với các method làm việc với mảng khác.
 
 ### Kết luận
 
@@ -763,4 +766,46 @@ Nhìn có vẻ giống nhau nhề!! Vậy điểm khác biệt ở đây là gì
 ```js
 const classes = ['first', 'second'];
 classes.join(' - '); // "first - second"
+```
+
+## So sánh `array.__proto__` vs `Array.prototype` <a name="proto-prototype"></a>
+
+Trường hợp 1:
+
+```js
+let arr = [1, 2, 3];
+arr.__proto__.sayHello = () => {
+  console.log('Hello D-Soft');
+};
+
+arr.sayHello(); // Return:  'Hello D-Soft'
+```
+
+Trường hợp 2:
+
+```js
+let arr = [1, 2, 3];
+Array.prototype.sayHello = () => {
+  console.log('Hello D-Soft');
+};
+
+arr.sayHello(); // Return:  'Hello D-Soft'
+```
+
+Cả 2 trường hợp đều hoạt động và cho ra cùng 1 kết quả, vậy điểm khác biệt thực sự giữa hai trường hợp này là gì?
+
+Khi một `instance` được tạo ra (ví dụ: `arr`), nó lấy những gì có trong thuộc tính `prototype` của `constructor` của nó (`Array`) và sử dụng nó như là đối tượng để tìm các giá trị được kế thừa, hay còn được biết đến là `prototype` - những gì có thể truy cập thông qua `__proto__` khi đi qua `instance`. Nếu `constructor` của `instance` **A** là `constructor` **B** thì `A.__proto__` sẽ bằng `B.prototype`
+
+```js
+console.log(new Array().proto === Array.prototype); // true
+console.log(new Date().proto === Date.prototype); // true
+console.log(new Error().proto === Error.prototype); // true
+```
+
+Chúng có cùng giá trị, chỉ khác nhau về cách get ra nó.
+
+Lưu ý rằng không nên sử dụng `__proto__` và thay vào đó nên sử dụng `Object.getPrototypeOf()` vì `__proto__` có thể không tồn tại trên tất cả các đối tượng.
+
+```js
+console.log(Object.getPrototypeOf(new Array()) === Array.prototype); // true
 ```
