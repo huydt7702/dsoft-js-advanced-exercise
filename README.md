@@ -4,11 +4,11 @@
 2. [Test performance trên các phương thức làm việc với mảng phổ biến](#test-performance)
 3. [So sánh phương thức `.splice()` vs `.slice()`](#splice-slice-difference)
 4. [So sánh `spread operator` vs `.concat()`](#spread-concat-difference)
-5. [So sánh `new Array()` vs `[]`](#newArray-brackets-difference)
-6. [So sánh `new Array()` vs `Array()`](#newArray-Array-difference)
+5. [So sánh `new Array()` vs `[]`](#newarray-brackets-difference)
+6. [So sánh `new Array()` vs `Array()`](#newarray-array-difference)
 7. [So sánh `.at(index)` vs `array[index]`](#at-array[index]-difference)
-8. [So sánh `.findIndex()` vs `.indexOf()`](#findIndex-indexOf-difference)
-9. [So sánh `.join()` vs `.toString()`](#join-toString-difference)
+8. [So sánh `.findIndex()` vs `.indexOf()`](#findindex-indexof-difference)
+9. [So sánh `.join()` vs `.toString()`](#join-tostring-difference)
 
 ## Ưu nhược điểm của các phương thức làm việc với mảng <a name="advantages-disadvantages"></a>
 
@@ -552,7 +552,7 @@ concat-many: 0.338134765625 ms
 spread-many: 15.35009765625 ms
 ```
 
-## So sánh `new Array()` vs `[]` <a name="newArray-brackets-difference"></a>
+## So sánh `new Array()` vs `[]` <a name="newarray-brackets-difference"></a>
 
 Sự khác biệt thực sự giữa việc khai báo một mảng như thế này là gì?
 
@@ -619,7 +619,7 @@ new Array(2).hasOwnProperty(0); // false
 
 **Và đó là lý do tại sao bạn không thể mong đợi bất kỳ hàm lặp nào hoạt động như thông thường trên các mảng được tạo ra từ `new Array(len)`.**
 
-## Vậy còn `new Array()` vs `Array()` khác gì nhau? <a name="newArray-Array-difference"></a>
+## Vậy còn `new Array()` vs `Array()` khác gì nhau? <a name="newarray-array-difference"></a>
 
 Sự khác biệt giữa:
 
@@ -684,7 +684,7 @@ Tuy nhiên, có những hạn chế khi chuyển sang sử dụng nó:
 
 À, còn một điểm khác biệt nữa là `Array.prototype.at()` chỉ để truy xuất phần tử trong mảng. Nó không thể được sử dụng để gán, nhưng `array[index]` thì có thể.
 
-## So sánh `.findIndex()` vs `indexOf()` <a name="findIndex-indexOf-difference"></a>
+## So sánh `.findIndex()` vs `indexOf()` <a name="findindex-indexof-difference"></a>
 
 Đoạn code sử dụng `.findIndex()`
 
@@ -736,7 +736,7 @@ let fruits = ['Apple', 'Banana', 'Pear', 'Orange'];
 let index = fruits.indexOf('Orange'); // Returns 3.
 ```
 
-## So sánh `.join()` vs `.toString()` <a name="join-toString-difference"></a>
+## So sánh `.join()` vs `.toString()` <a name="join-tostring-difference"></a>
 
 Đoạn code về phương thức `.join()`
 
