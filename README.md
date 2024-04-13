@@ -797,9 +797,9 @@ Cả 2 trường hợp đều hoạt động và cho ra cùng 1 kết quả, v�
 Khi một `instance` được tạo ra (ví dụ: `arr`), nó lấy những gì có trong thuộc tính `prototype` của `constructor` của nó (`Array`) và sử dụng nó như là đối tượng để tìm các giá trị được kế thừa, hay còn được biết đến là `prototype` - những gì có thể truy cập thông qua `__proto__` khi đi qua `instance`. Nếu `constructor` của `instance` **A** là `constructor` **B** thì `A.__proto__` sẽ bằng `B.prototype`
 
 ```js
-console.log(new Array().proto === Array.prototype); // true
-console.log(new Date().proto === Date.prototype); // true
-console.log(new Error().proto === Error.prototype); // true
+console.log(new Array().__proto__ === Array.prototype); // true
+console.log(new Date().__proto__ === Date.prototype); // true
+console.log(new Error().__proto__ === Error.prototype); // true
 ```
 
 Chúng có cùng giá trị, chỉ khác nhau về cách get ra nó.
