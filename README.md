@@ -63,6 +63,24 @@
   - Chỉ trả về `true` hoặc `false`, không thể trả về các phần tử thỏa mãn điều kiện.
   - Không thể sử dụng để biến đổi mảng.
 
+7. `slice()`
+
+- **Ưu điểm**:
+  - Trả về một phần của mảng ban đầu dựa trên chỉ số bắt đầu và kết thúc.
+  - Không thay đổi mảng ban đầu, mà trả về một mảng mới.
+  - Dễ đọc và dễ sử dụng.
+- **Nhược điểm**:
+  - Không thay đổi mảng gốc, điều này có thể làm tăng tài nguyên nếu cần thay đổi mảng gốc.
+
+8. `splice()`
+
+- **Ưu điểm**:
+  - Cho phép thêm, xóa hoặc thay đổi các phần tử trong mảng gốc.
+  - Linh hoạt và mạnh mẽ.
+- **Nhược điểm**:
+  - Thay đổi mảng gốc, điều này có thể làm mất dữ liệu gốc và khó theo dõi các thay đổi.
+  - Cú pháp có thể hơi phức tạp hơn so với các phương thức khác.
+
 Mỗi hàm có những ưu nhược điểm riêng và được sử dụng trong các trường hợp cụ thể. Sự lựa chọn phụ thuộc vào yêu cầu cụ thể của bạn khi làm việc với mảng trong `JavaScript`.
 
 ## Test performance trên các phương thức làm việc với mảng phổ biến <a name="test-performance"></a>
