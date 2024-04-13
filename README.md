@@ -8,6 +8,7 @@
 6. [So sánh `new Array()` vs `Array()`](#newArray-Array-difference)
 7. [So sánh `.at(index)` vs `array[index]`](#at-array[index]-difference)
 8. [So sánh `.findIndex()` vs `.indexOf()`](#findIndex-indexOf-difference)
+9. [So sánh `.join()` vs `.toString()`](#join-toString-difference)
 
 ## Ưu nhược điểm của các phương thức làm việc với mảng <a name="advantages-disadvantages"></a>
 
@@ -466,14 +467,14 @@ let numbers = ['one', 'two', 'three'];
 console.log(numbers.concat(parts)); // // Return: ['one', 'two', 'three', 'four', 'five']
 ```
 
-Ồ!!! Cả hai đều cho ra kết quả giống nhau. Vậy, điểm khác biệt giữa chúng là gì? Và cái nào performance tốt hơn? Hãy cùng tớ tìm hiểu nhé :)) <br> <br>
+Ồ!!! Cả hai đều cho ra kết quả giống nhau. Vậy, điểm khác biệt giữa chúng là gì? Và cái nào performance tốt hơn? Hãy cùng tớ tìm hiểu nhé :))
 
-Let's go <br> <br>
+Let's go
 
-`.concat()` và `spread operator` rất khác nhau khi đối số không phải là một array. <br> <br>
+`.concat()` và `spread operator` rất khác nhau khi đối số không phải là một array.
 
 - Khi đối số không phải là một array, `.concat()` thêm toàn bộ argument vào cuối mảng mà không thực hiện bất kỳ việc chia nhỏ hay lặp lại nào
-- Trong khi `spread operator` cố gắng lặp qua mỗi phần tử của argument và thêm chúng vào mảng, do đó kết quả sẽ bị chia nhỏ thành các phần tử riêng biệt. <br> <br>
+- Trong khi `spread operator` cố gắng lặp qua mỗi phần tử của argument và thêm chúng vào mảng, do đó kết quả sẽ bị chia nhỏ thành các phần tử riêng biệt.
 
 Đây là ví dụ:
 
@@ -496,11 +497,11 @@ console.log(a.concat(x)); // [1, 2, 3, 99]
 console.log([...a, ...x]); // TypeError: x is not iterable
 ```
 
-`.concat()` coi số 99 là một phần tử duy nhất, trong khi `spread operator` cố gắng lặp qua nó và fail vì number không thể lặp qua. <br> <br>
+`.concat()` coi số 99 là một phần tử duy nhất, trong khi `spread operator` cố gắng lặp qua nó và fail vì number không thể lặp qua.
 
-Kết luận lại, khi argument có thể không phải là một mảng, lựa chọn giữa `.concat()` và `spread operator` phụ thuộc vào việc bạn muốn chúng được lặp qua hay không. <br> <br>
+Kết luận lại, khi argument có thể không phải là một mảng, lựa chọn giữa `.concat()` và `spread operator` phụ thuộc vào việc bạn muốn chúng được lặp qua hay không.
 
-Ngoài ra, `ES6` cung cấp một cách để ghi đè hành vi mặc định của `.concat()` bằng `Symbol.isConcatSpreadable`. Mặc định, symbol này là `true` cho mảng và `false` cho mọi thứ khác. Đặt nó thành `true` sẽ khiến `.concat()` thử lặp qua argument, giống như `spread operator`. <br> <br>
+Ngoài ra, `ES6` cung cấp một cách để ghi đè hành vi mặc định của `.concat()` bằng `Symbol.isConcatSpreadable`. Mặc định, symbol này là `true` cho mảng và `false` cho mọi thứ khác. Đặt nó thành `true` sẽ khiến `.concat()` thử lặp qua argument, giống như `spread operator`.
 
 ```js
 const str1 = 'hello';
@@ -733,4 +734,33 @@ Rồi tiếp theo tớ sẽ tìm index của một array đơn giản hơn
 let fruits = ['Apple', 'Banana', 'Pear', 'Orange'];
 
 let index = fruits.indexOf('Orange'); // Returns 3.
+```
+
+## So sánh `.join()` vs `.toString()` <a name="join-toString-difference"></a>
+
+Đoạn code về phương thức `.join()`
+
+```js
+const hihi = ['Huy', 'Dep', 'Trai'];
+hihi.join(); // Return: 'Huy,Dep,Trai'
+```
+
+Đoạn code về phương thức `.toString()`
+
+```js
+const hihi = ['Huy', 'Dep', 'Trai'];
+hihi.toString(); // Return: 'Huy,Dep,Trai'
+```
+
+Nhìn có vẻ giống nhau nhề!! Vậy điểm khác biệt ở đây là gì, cùng mình tìm hiểu nhé :)
+
+`.toString()` là một phương thức mà có thể tìm thấy không chỉ trong `Array` mà còn tìm thấy trong mọi đối tượng (như object, number)
+
+`.join()` cho phép chuyển đổi mọi phần tử của đối tượng `Array` thành một `string`, và nối với nhau bằng dấu phân cách (separator). Nó hoạt động giống như `toString()` cho `Array`, nhưng điểm khác biệt là có thể chỉ định dấu phân cách (separator).
+
+#### Một ví dụ:
+
+```js
+const classes = ['first', 'second'];
+classes.join(' - '); // "first - second"
 ```
