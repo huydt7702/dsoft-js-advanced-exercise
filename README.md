@@ -864,3 +864,54 @@ let hasOrange = fruits.includes('Orange'); // Returns true.
 ```
 
 ## So sánh `.flat()` vs `.flatMap()` <a name="flat-flatmap-difference"></a>
+
+Đầu tiên ta sẽ nói về phương thức `.flat()`
+
+Phương thức này cho phép làm phẳng các mảng lồng nhau đến một mức độ nhất định.
+
+Mặc định, nó sẽ làm phẳng chỉ một mức lồng.
+
+Ví dụ:
+
+```js
+const nestedNumbers = [1, [2, 3], [4, [5, 6]]];
+
+const flatResult = nestedNumbers.flat();
+console.log(flatResult); // [1, 2, 3, 4, [5, 6]]
+```
+
+Bạn có thể cung cấp một độ sâu `(depth)` để làm phẳng đến các mức sâu hơn.
+
+Ví dụ:
+
+```js
+const nestedNumbers = [1, [2, 3], [4, [5, 6]]];
+
+const resultFlatDeep = nestedNumbers.flat(2);
+console.log(resultFlatDeep); // [1, 2, 3, 4, 5, 6]
+```
+
+Tiếp theo ta sẽ nói về phương thức `.flatMap()`
+
+Phương thức này kết hợp giữa việc sử dụng `.map()` và `.flat()`
+
+Nó áp dụng một hàm `.map()` cho mỗi phần tử trong mảng và sau đó làm phẳng kết quả thành một mảng mới.
+
+Tuy nhiên, nó chỉ làm phẳng một mức lồng.
+
+Ví dụ:
+
+```js
+const nestedNumbers = [1, [2, 3], [4, [5, 6]]];
+
+const result = nestedNumbers.flatMap((num) => num);
+console.log(result); // [1, 2, 3, 4, [5, 6]]
+```
+
+```js
+const numbers = [1, 2, 3, 4];
+const result = numbers.flatMap((num) => [num, num * 2]);
+console.log(result); // [1, 2, 2, 4, 3, 6, 4, 8]
+```
+
+Tóm lại, `.flat()` là phương thức dùng để làm phẳng các mảng lồng nhau đến một mức độ nhất định, trong khi `.flatMap()` kết hợp việc áp dụng hàm `.map()` và làm phẳng kết quả thành một mảng mới, nhưng chỉ làm phẳng một mức lồng.
