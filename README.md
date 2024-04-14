@@ -9,9 +9,11 @@
 7. [So sánh `.at(index)` vs `array[index]`](#at-array[index]-difference)
 8. [So sánh `.findIndex()` vs `.indexOf()`](#findindex-indexof-difference)
 9. [So sánh `.join()` vs `.toString()`](#join-tostring-difference)
-10. [So sánh `array.__proto__` vs `Array.prototype`](#proto-prototype)
+10. [So sánh `array.__proto__` vs `Array.prototype`](#proto-prototype-difference)
+11. [So sánh `.includes()` vs `.some()`](#includes-some-difference)
+12. [So sánh `.flat()` vs `.flatMap()`](#flat-flatmap-difference)
 
-Các nguồn tham khảo: `Stack Overflow`, `Chat GPT`, `Reddit` `MDN`,`W3Schools`, `Google`
+Các nguồn tham khảo: `Stack Overflow`, `Chat GPT`, `Reddit`, `MDN`,`W3Schools`, `Google`
 
 ## Ưu nhược điểm của các phương thức làm việc với mảng <a name="advantages-disadvantages"></a>
 
@@ -160,7 +162,8 @@ console.timeEnd('forEach');
 forEach: 0.123046875 ms
 ```
 
-Rồi bây giờ sẽ là array có `10000000` values, vẫn là sử dụng lại code ở trên chỉ thay thế `arraySize` bằng `10000000`. <br> <br>
+Rồi bây giờ sẽ là array có `10000000` values, vẫn là sử dụng lại code ở trên chỉ thay thế `arraySize` bằng `10000000`.
+
 Kết quả của chúng ta ở đây:
 
 ```js
@@ -234,7 +237,7 @@ Và đây là kết quả mà tớ nhận được
 while: 0.115966796875 ms
 ```
 
-Còn đối với array `10000000` values thì sao, vẫn như thường lệ, sử dụng lại code ở trên và cho `arraySize` bằng `10000000` <br> <br>
+Còn đối với array `10000000` values thì sao, vẫn như thường lệ, sử dụng lại code ở trên và cho `arraySize` bằng `10000000`
 
 Kết quả của chúng ta ở đây:
 
@@ -273,7 +276,7 @@ Và đây là kết quả của chúng ta:
 do while: 0.168212890625 ms
 ```
 
-Rồi vẫn như thế nhé, thử với `arraySize` bằng `10000000` xem nào <br> <br>
+Rồi vẫn như thế nhé, thử với `arraySize` bằng `10000000` xem nào
 
 Bùmmm
 
@@ -515,7 +518,7 @@ str2[Symbol.isConcatSpreadable] = true;
 console.log([1, 2, 3].concat(str2)); // [ 1, 2, 3, 'h', 'e', 'l', 'l', 'o' ]
 ```
 
-Hiệu suất của `.concat()` nhanh hơn, có lẽ vì nó có thể được tối ưu hóa cho mảng, trong khi `spread operator` phải tuân theo giao thức lặp chung. <br> <br>
+Hiệu suất của `.concat()` nhanh hơn, có lẽ vì nó có thể được tối ưu hóa cho mảng, trong khi `spread operator` phải tuân theo giao thức lặp chung.
 
 Hãy cùng tớ test timings nào:
 
@@ -761,14 +764,14 @@ Nhìn có vẻ giống nhau nhề!! Vậy điểm khác biệt ở đây là gì
 
 `.join()` cho phép chuyển đổi mọi phần tử của đối tượng `Array` thành một `string`, và nối với nhau bằng dấu phân cách (separator). Nó hoạt động giống như `toString()` cho `Array`, nhưng điểm khác biệt là có thể chỉ định dấu phân cách (separator).
 
-#### Một ví dụ:
+Một ví dụ:
 
 ```js
 const classes = ['first', 'second'];
 classes.join(' - '); // "first - second"
 ```
 
-## So sánh `array.__proto__` vs `Array.prototype` <a name="proto-prototype"></a>
+## So sánh `array.__proto__` vs `Array.prototype` <a name="proto-prototype-difference"></a>
 
 Trường hợp 1:
 
@@ -809,3 +812,55 @@ Lưu ý rằng không nên sử dụng `__proto__` và thay vào đó nên sử 
 ```js
 console.log(Object.getPrototypeOf(new Array()) === Array.prototype); // true
 ```
+
+## So sánh `.includes()` vs `.some()` <a name="includes-some-difference"></a>
+
+Đoạn code về phương thức `.includes()`
+
+```js
+const arr = [1, 2, 3, 4];
+arr.includes(2); // Return: true
+arr.includes(5); // Return: false
+```
+
+Đoạn code về phương thức `.some()`
+
+```js
+const arr = [1, 2, 3, 4];
+arr.some((num) => num === 2); // Return: true
+arr.some((num) => num === 5); // Return: false
+```
+
+Mình không nói dài dòng nữa, cùng tìm hiểu sự khác biệt ở đây là gì nhé
+
+Cũng giống như 2 phương thức `.indexOf()` và `.findIndex()` mà tớ đã so sánh ở trên kia thì 2 phương thức này cũng có điểm khác nhau tương tự.
+
+Sự khác biệt chính là các tham số truyền vào của các hàm này:
+
+- `.includes()` yêu cầu một giá trị làm tham số đầu tiên. Điều này làm cho nó là lựa chọn tốt khi bạn muốn kiểm tra một giá trị trong các mảng chứa các loại dữ liệu nguyên thủy (primitive types)(như string, number hoặc boolean).
+- `.some()` yêu cầu một hàm callback làm tham số đầu tiên. Sử dụng hàm này nếu bạn cần kiểm tra trong các mảng chứa các loại dữ liệu không nguyên thủy (non-primitive types) (như objects) hoặc điều kiện kiểm tra của bạn phức tạp hơn chỉ là một giá trị.
+
+Một số ví dụ nhé
+
+Trong ví dụ này tớ muốn kiểm tra trong một mảng chứa các object
+
+```js
+let fruits = [
+  { type: 'Apple', quantity: 9 },
+  { type: 'Banana', quantity: 2 },
+  { type: 'Orange', quantity: 8 },
+  { type: 'Pear', quantity: 777 },
+];
+
+let hasOrangeType = fruits.some((fruit) => fruit.type === 'Orange'); // Returns true.
+```
+
+Rồi tiếp theo tớ sẽ kiểm tra một array đơn giản hơn
+
+```js
+let fruits = ['Apple', 'Banana', 'Pear', 'Orange'];
+
+let hasOrange = fruits.includes('Orange'); // Returns true.
+```
+
+## So sánh `.flat()` vs `.flatMap()` <a name="flat-flatmap-difference"></a>
