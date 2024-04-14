@@ -13,8 +13,6 @@
 11. [So sánh `.includes()` vs `.some()`](#includes-some-difference)
 12. [So sánh `.flat()` vs `.flatMap()`](#flat-flatmap-difference)
 
-Các nguồn tham khảo: `Stack Overflow`, `Chat GPT`, `Reddit`, `MDN`,`W3Schools`, `Google`
-
 ## Ưu nhược điểm của các phương thức làm việc với mảng <a name="advantages-disadvantages"></a>
 
 `JavaScript` là ngôn ngữ lập trình mạnh mẽ và linh hoạt, đặc biệt là khi làm việc với mảng dữ liệu. Trong phần này, chúng ta sẽ đi vào so sánh ưu nhược điểm của các hàm thao tác mảng phổ biến nhất trong `JavaScript`.
@@ -93,7 +91,7 @@ Mỗi hàm có những ưu nhược điểm riêng và được sử dụng tron
 
 Trong phần này chúng ta sẽ so sánh thời gian chạy của các cách được sử dụng phổ biến nhất để lặp qua một mảng trong JavaScript. <br> <br>
 Để xem cách nào sẽ hiệu quả nhất nhé. <br> <br>
-Let'go :))
+Let's go :))
 
 - Ý tưởng rất đơn giản. Tớ đã so sánh thời gian chạy của năm cách rất phổ biến `(map, forEach, for, while, do while)` để lặp qua một mảng sử dụng một mảng có 100 giá trị và một mảng có 10 triệu giá trị. Code được chạy trong môi trường thực thi Node.js version `v20.11.0` trên một chiếc máy Laptop hệ điều hành `Linux ZorinOS 16.3`
 
@@ -278,8 +276,6 @@ do while: 0.168212890625 ms
 
 Rồi vẫn như thế nhé, thử với `arraySize` bằng `10000000` xem nào
 
-Bùmmm
-
 ```js
 do while: 175.574951171875 ms
 ```
@@ -323,9 +319,9 @@ Ok, Let's go
 
 ### Phương thức `.slice()`
 
-Phương thức `.slice` tạo ra một bản sao (shallow copy) của một phần được chỉ định của mảng vào trong một mảng mới. Mảng ban đầu sẽ không bị thay đổi. <br> <br>
+Phương thức `.slice()` tạo ra một bản sao (shallow copy) của một phần được chỉ định của mảng vào trong một mảng mới. Mảng ban đầu sẽ không bị thay đổi.
 
-Một số điều quan trọng cần biết về `splice`.
+Một số điều quan trọng cần biết về `.slice()`.
 
 #### Syntax và Parameters
 
@@ -378,7 +374,7 @@ Phương thức `.slice()` tạo ra bản sao nông (shallow copy), không phả
 
 ### Phương thức `.splice()`
 
-Phương thức `splice()` sửa đổi một mảng bằng cách xóa, thay thế hoặc chèn các mục vào một index đã chỉ định.
+Phương thức `.splice()` sửa đổi một mảng bằng cách xóa, thay thế hoặc chèn các mục vào một index đã chỉ định.
 
 #### Syntax và Parameters
 
@@ -430,9 +426,9 @@ fruits.splice(1, 1, 'Lemon', 'Orange'); // Returns ['Mango']
 
 #### Tại sao nên sử dụng `.splice()`?
 
-`.splice()` cho phép sửa đổi nội dung của một mảng bằng cách xóa hoặc chèn các phần tử mà không cần phải tạo ra một mảng mới. <br> <br>
+`.splice()` cho phép sửa đổi nội dung của một mảng bằng cách xóa hoặc chèn các phần tử mà không cần phải tạo ra một mảng mới.
 
-Một số trường hợp sử dụng phổ biến của `splice()`
+Một số trường hợp sử dụng phổ biến của `.splice()`
 
 - Chèn phần tử vào bất kỳ chỉ mục (index) nào
 - Xóa các phần tử theo chỉ mục hoặc giá trị
@@ -479,8 +475,8 @@ Let's go
 
 `.concat()` và `spread operator` rất khác nhau khi đối số không phải là một array.
 
-- Khi đối số không phải là một array, `.concat()` thêm toàn bộ argument vào cuối mảng mà không thực hiện bất kỳ việc chia nhỏ hay lặp lại nào
-- Trong khi `spread operator` cố gắng lặp qua mỗi phần tử của argument và thêm chúng vào mảng, do đó kết quả sẽ bị chia nhỏ thành các phần tử riêng biệt.
+- Khi đối số không phải là một array, `.concat()` thêm toàn bộ `argument` vào cuối mảng mà không thực hiện bất kỳ việc chia nhỏ hay lặp lại nào
+- Trong khi `spread operator` cố gắng lặp qua mỗi phần tử của `argument` và thêm chúng vào mảng, do đó kết quả sẽ bị chia nhỏ thành các phần tử riêng biệt.
 
 Đây là ví dụ:
 
@@ -505,9 +501,9 @@ console.log([...a, ...x]); // TypeError: x is not iterable
 
 `.concat()` coi số 99 là một phần tử duy nhất, trong khi `spread operator` cố gắng lặp qua nó và fail vì number không thể lặp qua.
 
-Kết luận lại, khi argument có thể không phải là một mảng, lựa chọn giữa `.concat()` và `spread operator` phụ thuộc vào việc bạn muốn chúng được lặp qua hay không.
+Kết luận lại, khi `argument` có thể không phải là một mảng, lựa chọn giữa `.concat()` và `spread operator` phụ thuộc vào việc bạn muốn chúng được lặp qua hay không.
 
-Ngoài ra, `ES6` cung cấp một cách để ghi đè hành vi mặc định của `.concat()` bằng `Symbol.isConcatSpreadable`. Mặc định, symbol này là `true` cho mảng và `false` cho mọi thứ khác. Đặt nó thành `true` sẽ khiến `.concat()` thử lặp qua argument, giống như `spread operator`.
+Ngoài ra, `ES6` cung cấp một cách để ghi đè hành vi mặc định của `.concat()` bằng `Symbol.isConcatSpreadable`. Mặc định, symbol này là `true` cho mảng và `false` cho mọi thứ khác. Đặt nó thành `true` sẽ khiến `.concat()` thử lặp qua `argument`, giống như `spread operator`.
 
 ```js
 const str1 = 'hello';
@@ -592,7 +588,7 @@ const e = [3]; // e.length == 1, e[0] == 3
 const f = new Array(3); // f.length == 3, f[0] == undefined
 ```
 
-- Một điểm khác biệt là khi sử dụng `new Array()`, bạn có thể thiết lập kích thước của mảng, điều này ảnh hưởng đến kích thước của `stack`. Điều này có thể hữu ích nếu bạn đang gặp phải tình trạng tràn `stack` (stack overflow), đó là điều xảy ra khi kích thước của mảng vượt quá kích thước của stack, và nó phải được tạo lại. Vì vậy, tùy thuộc vào trường hợp sử dụng, có thể có sự tăng `performance` khi sử dụng new Array() bởi vì bạn có thể ngăn chặn tình trạng tràn xảy ra.
+- Một điểm khác biệt là khi sử dụng `new Array()`, bạn có thể thiết lập kích thước của mảng, điều này ảnh hưởng đến kích thước của `stack`. Điều này có thể hữu ích nếu bạn đang gặp phải tình trạng tràn `stack` (stack overflow), đó là điều xảy ra khi kích thước của mảng vượt quá kích thước của stack, và nó phải được tạo lại. Vì vậy, tùy thuộc vào trường hợp sử dụng, có thể có sự tăng `performance` khi sử dụng `new Array()` bởi vì bạn có thể ngăn chặn tình trạng tràn xảy ra.
 - Còn một điểm khác biệt nữa là: `new Array(5)`thực sự không thêm 5 phần tử `undefined` vào mảng. Nó chỉ thêm không gian cho 5 phần tử. Hãy nhớ rằng việc sử dụng `Array` theo cách này sẽ gây khó khăn cho việc dựa vào `array.length` để tính toán.
 
 Ví dụ minh họa:
@@ -616,7 +612,7 @@ Thấy không? Ngữ nghĩa là hoàn toàn khác nhau! Vậy tại sao lại nh
 
 Theo quy định `ES6 Spec 22.1.1.2`, nhiệm vụ của `new Array(len)` chỉ là tạo ra một mảng mới mà thuộc tính `length` của nó được thiết lập là đối số `len` và đó là tất cả, có nghĩa là không có **phần tử thực** nào trong mảng mới được tạo ra này.
 
-Hàm `map()`, theo quy định `22.1.3.15`, trước tiên sẽ kiểm tra `HasProperty` sau đó gọi lại hàm `callback`
+Hàm `.map()`, theo quy định `22.1.3.15`, trước tiên sẽ kiểm tra `HasProperty` sau đó gọi lại hàm `callback`
 
 ```js
 new Array(2).hasOwnProperty(0); // false
@@ -762,7 +758,7 @@ Nhìn có vẻ giống nhau nhề!! Vậy điểm khác biệt ở đây là gì
 
 `.toString()` là một phương thức mà có thể tìm thấy không chỉ trong `Array` mà còn tìm thấy trong mọi đối tượng (như object, number)
 
-`.join()` cho phép chuyển đổi mọi phần tử của đối tượng `Array` thành một `string`, và nối với nhau bằng dấu phân cách (separator). Nó hoạt động giống như `toString()` cho `Array`, nhưng điểm khác biệt là có thể chỉ định dấu phân cách (separator).
+`.join()` cho phép chuyển đổi mọi phần tử của đối tượng `Array` thành một `string`, và nối với nhau bằng dấu phân cách (separator). Nó hoạt động giống như `.toString()` cho `Array`, nhưng điểm khác biệt là có thể chỉ định dấu phân cách (separator).
 
 Một ví dụ:
 
